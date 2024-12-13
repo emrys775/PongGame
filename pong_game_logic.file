@@ -1,0 +1,242 @@
+import tkinter as tk
+
+# Screen dimensions
+WIDTH, HEIGHT = 800, 600
+
+# Colors as hex strings
+WHITE = "#FFFFFF"
+BLACK = "#000000"
+
+# Paddle settings
+PADDLE_WIDTH, PADDLE_HEIGHT = 15, 100
+paddle_speed = 20
+
+# Ball settings
+BALL_SIZE = 15
+ball_speed_x, ball_speed_y = 4, 4
+
+# Initialize positions
+left_paddle_pos = [30, (HEIGHT - PADDLE_HEIGHT) // 2]
+right_paddle_pos = [WIDTH - 30 - PADDLE_WIDTH, (HEIGHT - PADDLE_HEIGHT) // 2]
+ball_pos = [WIDTH // 2 - BALL_SIZE // 2, HEIGHT // 2 - BALL_SIZE // 2]
+
+# Initialize velocity
+ball_velocity = [ball_speed_x, ball_speed_y]
+
+
+# Update game logic
+def update():
+    global ball_velocity
+
+    # Move ball
+    ball_pos[0] += ball_velocity[0]
+    ball_pos[1] += ball_velocity[1]
+
+    # Ball collision with top and bottom
+    if ball_pos[1] <= 0 or ball_pos[1] + BALL_SIZE >= HEIGHT:
+        ball_velocity[1] = -ball_velocity[1]
+
+    # Ball collision with paddles
+    if (ball_pos[0] <= left_paddle_pos[0] + PADDLE_WIDTH and
+            left_paddle_pos[1] <= ball_pos[1] <= left_paddle_pos[1] + PADDLE_HEIGHT):
+        ball_velocity[0] = -ball_velocity[0]
+
+    if (ball_pos[0] + BALL_SIZE >= right_paddle_pos[0] and
+            right_paddle_pos[1] <= ball_pos[1] <= right_paddle_pos[1] + PADDLE_HEIGHT):
+        ball_velocity[0] = -ball_velocity[0]
+
+    # Ball out of bounds
+    if ball_pos[0] <= 0 or ball_pos[0] + BALL_SIZE >= WIDTH:
+        reset_ball()
+
+    # Redraw
+    draw_game()
+    root.after(16, update)  # Schedule next frame (roughly 60 FPS)
+
+
+def reset_ball():
+    # Reset ball to center
+    ball_pos[0] = WIDTH // 2 - BALL_SIZE // 2
+    ball_pos[1] = HEIGHT // 2 - BALL_SIZE // 2
+    ball_velocity[0] = -ball_velocity[0]
+
+
+def move_paddle(event):
+    # Paddle movement logic
+    if event.keysym == "w" and left_paddle_pos[1] > 0:
+        left_paddle_pos[1] -= paddle_speed
+    elif event.keysym == "s" and left_paddle_pos[1] + PADDLE_HEIGHT < HEIGHT:
+        left_paddle_pos[1] += paddle_speed
+    elif event.keysym == "Up" and right_paddle_pos[1] > 0:
+        right_paddle_pos[1] -= paddle_speed
+    elif event.keysym == "Down" and right_paddle_pos[1] + PADDLE_HEIGHT < HEIGHT:
+        right_paddle_pos[1] += paddle_speed
+
+
+def draw_game():
+    # Clear screen
+    canvas.delete("all")
+
+    # Draw background
+    canvas.create_rectangle(0, 0, WIDTH, HEIGHT, fill=BLACK, outline=BLACK)
+
+    # Draw paddles
+    canvas.create_rectangle(left_paddle_pos[0], left_paddle_pos[1],
+                            left_paddle_pos[0] + PADDLE_WIDTH,
+                            left_paddle_pos[1] + PADDLE_HEIGHT,
+                            fill=WHITE, outline=WHITE)
+    canvas.create_rectangle(right_paddle_pos[0], right_paddle_pos[1],
+                            right_paddle_pos[0] + PADDLE_WIDTH,
+                            right_paddle_pos[1] + PADDLE_HEIGHT,
+                            fill=WHITE, outline=WHITE)
+
+    # Draw ball
+    canvas.create_oval(ball_pos[0], ball_pos[1],
+                       ball_pos[0] + BALL_SIZE, ball_pos[1] + BALL_SIZE,
+                       fill=WHITE, outline=WHITE)
+
+
+# UI setup
+root = tk.Tk()
+root.title("Pong Game")
+
+canvas = tk.Canvas(root, width=WIDTH, height=HEIGHT, bg=BLACK)
+canvas.pack()
+
+# Key bindings for paddle movement
+root.bind("<KeyPress>", move_paddle)
+
+# Start the game loop
+update()
+root.mainloop()import tkinter as tk
+
+# Screen dimensions
+WIDTH, HEIGHT = 800, 600
+
+# Colors as hex strings
+WHITE = "#FFFFFF"
+BLACK = "#000000"
+
+# Paddle settings
+PADDLE_WIDTH, PADDLE_HEIGHT = 15, 100
+paddle_speed = 20
+
+# Ball settings
+BALL_SIZE = 15
+initial_ball_speed_x, initial_ball_speed_y = 4, 4
+ball_speed_increment = 0.5  # Speed increment per paddle hit
+
+# Initialize positions
+left_paddle_pos = [30, (HEIGHT - PADDLE_HEIGHT) // 2]
+right_paddle_pos = [WIDTH - 30 - PADDLE_WIDTH, (HEIGHT - PADDLE_HEIGHT) // 2]
+ball_pos = [WIDTH // 2 - BALL_SIZE // 2, HEIGHT // 2 - BALL_SIZE // 2]
+
+# Initialize velocity
+ball_velocity = [initial_ball_speed_x, initial_ball_speed_y]
+
+# Scores
+left_score = 0
+right_score = 0
+
+
+# Update game logic
+def update():
+    global ball_velocity, left_score, right_score
+
+    # Move ball
+    ball_pos[0] += ball_velocity[0]
+    ball_pos[1] += ball_velocity[1]
+
+    # Ball collision with top and bottom
+    if ball_pos[1] <= 0 or ball_pos[1] + BALL_SIZE >= HEIGHT:
+        ball_velocity[1] = -ball_velocity[1]
+
+    # Ball collision with paddles
+    if (ball_pos[0] <= left_paddle_pos[0] + PADDLE_WIDTH and
+            left_paddle_pos[1] <= ball_pos[1] <= left_paddle_pos[1] + PADDLE_HEIGHT):
+        ball_velocity[0] = -ball_velocity[0]
+        ball_velocity[0] += ball_speed_increment if ball_velocity[0] > 0 else -ball_speed_increment
+        ball_velocity[1] += ball_speed_increment if ball_velocity[1] > 0 else -ball_speed_increment
+        left_score += 1
+
+    if (ball_pos[0] + BALL_SIZE >= right_paddle_pos[0] and
+            right_paddle_pos[1] <= ball_pos[1] <= right_paddle_pos[1] + PADDLE_HEIGHT):
+        ball_velocity[0] = -ball_velocity[0]
+        ball_velocity[0] += ball_speed_increment if ball_velocity[0] > 0 else -ball_speed_increment
+        ball_velocity[1] += ball_speed_increment if ball_velocity[1] > 0 else -ball_speed_increment
+        right_score += 1
+
+    # Ball out of bounds
+    if ball_pos[0] <= 0:
+        reset_ball(right_scored=True)
+    elif ball_pos[0] + BALL_SIZE >= WIDTH:
+        reset_ball(left_scored=True)
+
+    # Redraw
+    draw_game()
+    root.after(16, update)  # Schedule next frame (roughly 60 FPS)
+
+
+def reset_ball(left_scored=False, right_scored=False):
+    global ball_velocity
+    # Reset ball to center
+    ball_pos[0] = WIDTH // 2 - BALL_SIZE // 2
+    ball_pos[1] = HEIGHT // 2 - BALL_SIZE // 2
+
+    # Reset speed
+    ball_velocity[0] = initial_ball_speed_x if ball_velocity[0] > 0 else -initial_ball_speed_x
+    ball_velocity[1] = initial_ball_speed_y if ball_velocity[1] > 0 else -initial_ball_speed_y
+
+
+def move_paddle(event):
+    # Paddle movement logic
+    if event.keysym == "w" and left_paddle_pos[1] > 0:
+        left_paddle_pos[1] -= paddle_speed
+    elif event.keysym == "s" and left_paddle_pos[1] + PADDLE_HEIGHT < HEIGHT:
+        left_paddle_pos[1] += paddle_speed
+    elif event.keysym == "Up" and right_paddle_pos[1] > 0:
+        right_paddle_pos[1] -= paddle_speed
+    elif event.keysym == "Down" and right_paddle_pos[1] + PADDLE_HEIGHT < HEIGHT:
+        right_paddle_pos[1] += paddle_speed
+
+
+def draw_game():
+    # Clear screen
+    canvas.delete("all")
+
+    # Draw background
+    canvas.create_rectangle(0, 0, WIDTH, HEIGHT, fill=BLACK, outline=BLACK)
+
+    # Draw paddles
+    canvas.create_rectangle(left_paddle_pos[0], left_paddle_pos[1],
+                            left_paddle_pos[0] + PADDLE_WIDTH,
+                            left_paddle_pos[1] + PADDLE_HEIGHT,
+                            fill=WHITE, outline=WHITE)
+    canvas.create_rectangle(right_paddle_pos[0], right_paddle_pos[1],
+                            right_paddle_pos[0] + PADDLE_WIDTH,
+                            right_paddle_pos[1] + PADDLE_HEIGHT,
+                            fill=WHITE, outline=WHITE)
+
+    # Draw ball
+    canvas.create_oval(ball_pos[0], ball_pos[1],
+                       ball_pos[0] + BALL_SIZE, ball_pos[1] + BALL_SIZE,
+                       fill=WHITE, outline=WHITE)
+
+    # Draw scores
+    canvas.create_text(WIDTH // 4, 30, text=f"Left Player: {left_score}", fill=WHITE, font=("Arial", 20))
+    canvas.create_text(3 * WIDTH // 4, 30, text=f"Right Player: {right_score}", fill=WHITE, font=("Arial", 20))
+
+
+# UI setup
+root = tk.Tk()
+root.title("Pong Game")
+
+canvas = tk.Canvas(root, width=WIDTH, height=HEIGHT, bg=BLACK)
+canvas.pack()
+
+# Key bindings for paddle movement
+root.bind("<KeyPress>", move_paddle)
+
+# Start the game loop
+update()
+root.mainloop()
