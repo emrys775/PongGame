@@ -12,8 +12,8 @@ screen.title("Pong Game")
 screen.tracer(0)
 
 # Create paddles
-left_paddle = Paddle(-550, 0)
-right_paddle = Paddle(550, 0)
+left_paddle = Paddle(-350, 0)
+right_paddle = Paddle(350, 0)
 
 # Create ball
 ball = Ball()
@@ -38,12 +38,12 @@ while game_is_on:
     ball.move()
 
     # Detect collision with top or bottom wall
-    if ball.ycor() > 500 or ball.ycor() < -500:
+    if ball.ycor() > 300 or ball.ycor() < -300:
         ball.bounce_y()
 
     # Detect collision with paddles
-    if (ball.xcor() > 550 and right_paddle.distance(ball) < 50) or (
-            ball.xcor() < -550 and left_paddle.distance(ball) < 50):
+    if (ball.xcor() > 350 and right_paddle.distance(ball) < 50) or (
+            ball.xcor() < -350 and left_paddle.distance(ball) < 50):
         ball.bounce_x()
 
     # Detect if the ball passes the paddles
@@ -51,7 +51,7 @@ while game_is_on:
         ball.reset_position()
         scoreboard.left_point()
 
-    if ball.xcor() < -780:  # Ball passed the left paddle
+    if ball.xcor() < -380:  # Ball passed the left paddle
         ball.reset_position()
         scoreboard.right_point()
 

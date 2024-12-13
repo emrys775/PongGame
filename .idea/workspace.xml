@@ -1,15 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="f5196031-d5d2-482d-ad53-a9477b8305cf" name="Changes" comment="" />
+    <list default="true" id="f5196031-d5d2-482d-ad53-a9477b8305cf" name="Changes" comment="This is a simple **Pong game** built using Python's built-in `turtle` library. The game is structured in a modular way with separate files for the paddle, ball, and scoreboard classes. Players use keyboard controls to move their paddles and compete to score points.">
+      <change beforePath="$PROJECT_DIR$/.idea/PongGame.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/PongGame.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scoreboard.py" beforeDir="false" afterPath="$PROJECT_DIR$/scoreboard.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 0
-}]]></component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Setup Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
   <component name="ProjectId" id="2q9xKXblVfOH648nTSyVMv0Nhyb" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -18,7 +36,16 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true"
+    "Python.ball.executor": "Run",
+    "Python.main.executor": "Run",
+    "Python.paddle.executor": "Run",
+    "Python.pong_game_logic.executor": "Run",
+    "Python.pong_game_main_logic.executor": "Run",
+    "Python.pong_game_ui.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "master",
+    "settings.editor.selected.configurable": "configurable.group.appearance"
   }
 }]]></component>
   <component name="SharedIndexes">
@@ -37,6 +64,38 @@
       <option name="presentableId" value="Default" />
       <updated>1734088530141</updated>
     </task>
+    <task id="LOCAL-00001" summary="This is a simple **Pong game** built using Python's built-in `turtle` library. The game is structured in a modular way with separate files for the paddle, ball, and scoreboard classes. Players use keyboard controls to move their paddles and compete to score points.">
+      <option name="closed" value="true" />
+      <created>1734091665337</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1734091665337</updated>
+    </task>
+    <task id="LOCAL-00002" summary="This is a simple **Pong game** built using Python's built-in `turtle` library. The game is structured in a modular way with separate files for the paddle, ball, and scoreboard classes. Players use keyboard controls to move their paddles and compete to score points.">
+      <option name="closed" value="true" />
+      <created>1734091680179</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1734091680179</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="This is a simple **Pong game** built using Python's built-in `turtle` library. The game is structured in a modular way with separate files for the paddle, ball, and scoreboard classes. Players use keyboard controls to move their paddles and compete to score points." />
+    <option name="LAST_COMMIT_MESSAGE" value="This is a simple **Pong game** built using Python's built-in `turtle` library. The game is structured in a modular way with separate files for the paddle, ball, and scoreboard classes. Players use keyboard controls to move their paddles and compete to score points." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ball.py</url>
+          <line>1</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
