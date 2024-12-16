@@ -23,7 +23,7 @@ PongGame/
 
 
 
-   git clone https://github.com/your-repo-url/PongGame.git
+   git clone https://github.com/emrys775/PongGame.git
 
 
 
@@ -55,6 +55,4 @@ Here's how the game looks during gameplay:
 - Make it single-player by implementing AI for Player 2.
 
 ### Author
-[Your Name or Organization Name]
-Feel free to reach out for any questions or contributions! Happy gaming. 🎮
-Save this content in a file named `README.md` in your `PongGame` directory. Let me know if you’d like additional features or changes!
+Emrys Grant
